@@ -30,4 +30,4 @@ This is how looks generated diagram for command:
 
 - python manage.py yuml auth contenttypes sessions sites messages admin --scruffy --scale 100 -o example.jpg
 
-http://www.gang.lt/example.jpg
+  http://www.gang.lt/example.jpg
