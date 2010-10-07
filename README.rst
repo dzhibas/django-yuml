@@ -7,9 +7,9 @@ http://yuml.me
 
 Installation
 ================
-#. Add the `debug_toolbar` directory to your Python path.
+#. Add the `django_yuml` directory to your Python path.
 
-#. Add `debug_yuml` to your `INSTALLED_APPS` setting so Django can find it.
+#. Add `django_yuml` to your `INSTALLED_APPS` setting so Django can find it.
 
 
 Examples
