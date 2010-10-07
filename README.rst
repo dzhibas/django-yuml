@@ -25,3 +25,9 @@ Examples
    python manage.py -a -o test.jpg
 
 #. python manage.py yuml auth contenttypes sessions admin -o test.pdf
+
+This is how looks generated diagram for command: 
+
+- python manage.py yuml auth contenttypes sessions sites messages admin --scruffy --scale 100 -o example.jpg
+
+http://www.gang.lt/example.jpg
