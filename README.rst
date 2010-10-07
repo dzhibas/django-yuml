@@ -3,6 +3,7 @@ Django Yuml
 ====================
 
 Generates YUML class diagram for you django project or specified apps in project
+
 http://yuml.me
 
 Installation
