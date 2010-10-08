@@ -16,13 +16,13 @@ Installation
 Examples
 ================
 
-#. python manage.py yourapp yoursecondapp --scruffy -s 75 -o test.png
+#. python manage.py yuml yourapp yoursecondapp --scruffy -s 75 -o test.png
 
-#. python manage.py justoneapp --scruffy -o test.pdf
+#. python manage.py yuml justoneapp --scruffy -o test.pdf
 
 #. generate whole project yuml
    
-   python manage.py -a -o test.jpg
+   python manage.py yuml -a -o test.jpg
 
 #. python manage.py yuml auth contenttypes sessions admin -o test.pdf
 
