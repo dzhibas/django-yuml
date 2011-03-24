@@ -14,7 +14,7 @@ class YUMLFormatter(object):
     APP_MODEL  = '.'
     FAKE_FIELD = '...{bg:orange}'
     PK         = '(pk) '
-    AGGREGATE  = '%(card_from)s<>-%(related)s%(card_to)s'
+    RELATION   = '%(card_from)s<-%(related)s%(symm)s%(card_to)s'
 
     @classmethod
     def wrap(kls, string):
@@ -55,20 +55,21 @@ class YUMLFormatter(object):
         return kls.wrap_field(string)
 
     @classmethod
-    def aggregate(kls, model, relation):
+    def rel_arrow(kls, model, relation):
         '''TODO: 
-        cardinality and related
+        cardinality symm and related
         '''
         d = {
             'card_from' :'',
             'related'   : relation.related_name or '',
             'card_to'   :'',
+            'symm'      :'',
         }
-        return kls.AGGREGATE % d
+        return kls.RELATION % d
 
     @classmethod
     def relation(kls, model, relation):
-        return kls.wrap(kls.label(relation.to))+kls.aggregate(model, relation)+kls.wrap(kls.label(model))
+        return kls.wrap(kls.label(relation.to))+kls.rel_arrow(model, relation)+kls.wrap(kls.label(model))
 
 
 class Command(BaseCommand):
