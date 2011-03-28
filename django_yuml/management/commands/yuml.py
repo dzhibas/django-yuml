@@ -15,6 +15,7 @@ class YUMLFormatter(object):
     FAKE_FIELD = '...{bg:orange}'
     PK         = '(pk) '
     RELATION   = '%(card_from)s<-%(related)s%(symm)s%(card_to)s'
+    THROUGH    = '<-.-%(related)s%(symm)s'
 
     @classmethod
     def wrap(kls, string):
@@ -68,9 +69,23 @@ class YUMLFormatter(object):
         return kls.RELATION % d
 
     @classmethod
+    def through_arrow(kls, model, relation):
+        '''TODO: 
+        cardinality symm and related
+        '''
+        d = {
+            'related'   : relation.related_name or '',
+            'symm'      :'',
+        }
+        return kls.THROUGH % d
+
+    @classmethod
     def relation(kls, model, relation):
         return kls.wrap(kls.label(relation.to))+kls.rel_arrow(model, relation)+kls.wrap(kls.label(model))
 
+    @classmethod
+    def through(kls, model, relation):
+        return kls.wrap(kls.label(relation.to))+kls.through_arrow(model, relation)+kls.wrap(kls.label(model))
 
 class Command(BaseCommand):
     option_list = BaseCommand.option_list + (
@@ -128,6 +143,15 @@ class Command(BaseCommand):
                         arrow_list.append(F.relation(m, field.rel))
                         if get_app(field.rel.to._meta.app_label) not in applications:
                             external_model.add(field.rel.to)
+                fields = [f for f in m._meta.many_to_many]
+                for field in fields:
+                    string += F.field(field)
+                    if field.rel.through._meta.auto_created:
+                        arrow_list.append(F.relation(m, field.rel))
+                    else:
+                        arrow_list.append(F.through(m, field.rel))
+                    if get_app(field.rel.to._meta.app_label) not in applications:
+                        external_model.add(field.rel.to)
                 model_list.append(F.wrap(string))
                 for parent in m._meta.parents:
                     arrow_list.append(F.inherit(m, parent))
