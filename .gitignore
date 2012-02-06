@@ -1,1 +1,15 @@
+.DS_Store
 *.pyc
+*$py.class
+*~
+.*.sw[po]
+dist/
+*.egg-info
+*.egg
+*.egg/
+doc/__build/*
+build/
+.build/
+pip-log.txt
+.directory
+*.db
